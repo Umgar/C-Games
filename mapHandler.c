@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const int mapH = 20, mapW = 50;
+const int mapH = 20, mapW = 100;
 
-char gameMap[20][51];
+char **gameMap;
 
 void ShowMap()
 {
@@ -19,6 +19,10 @@ void ShowMap()
 void CreateMap()
 {
     int i, j;
+
+    gameMap = (char**)malloc(mapH * sizeof(char*));
+    for (i = 0; i < mapH; i++)
+        gameMap[i] = (char*)malloc((mapW+1) * sizeof(char));
 
     for (i = 0; i < mapW; i++)
         gameMap[0][i] = '#';
@@ -40,4 +44,24 @@ void CreateMap()
         gameMap[i][0] = '#';
         gameMap[i][mapW-1] = '#';
     }
+}
+void DestroyMap()
+{
+    for (int i = 0; i < mapH; i++)
+        free(gameMap[i]);
+ 
+    free(gameMap);
+}
+
+char ChangeCell(int height, int width, char symbol)
+{
+    if(height>mapH || height < 0 || width > mapW || width < 0) return '\0';
+    char prevChar = gameMap[height][width];
+    gameMap[height][width] = symbol;
+    return prevChar;
+}
+
+char GetCellVal(int height, int width)
+{
+    return gameMap[height][width];
 }
