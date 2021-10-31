@@ -8,11 +8,11 @@ char **gameMap;
 void ShowMap()
 {
     int i, j;
-    system("clear");
+    clear();
     for (i = 0; i < mapH; i++)
     {
-        printf("%s", gameMap[i]);
-        printf("\n");
+        printw("%s", gameMap[i]);
+        printw("\n");
     }
 }
 
@@ -47,7 +47,8 @@ void CreateMap()
 }
 void DestroyMap()
 {
-    for (int i = 0; i < mapH; i++)
+    int i;
+    for (i = 0; i < mapH; i++)
         free(gameMap[i]);
  
     free(gameMap);
@@ -55,7 +56,7 @@ void DestroyMap()
 
 char ChangeCell(int height, int width, char symbol)
 {
-    if(height>mapH || height < 0 || width > mapW || width < 0) return '\0';
+    if(height>mapH-1 || height < 1 || width > mapW || width < 0) return '\0';
     char prevChar = gameMap[height][width];
     gameMap[height][width] = symbol;
     return prevChar;

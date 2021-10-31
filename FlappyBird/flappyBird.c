@@ -12,7 +12,8 @@ const int pipeNum = 10;
 
 void PipeArraySetUp()
 {
-    for(int i=0;i<pipeNum;i++)
+    int i;
+    for(i=0;i<pipeNum;i++)
         pipeArray[i].free = 0;
     pipeArray[0] = CreatePipe(6);
     DrawPipe(&pipeArray[0]);
@@ -44,8 +45,8 @@ void UpdatePipes(int maxGap)
 
 int FreePipesNum()
 {
-    int a =0;
-    for(int i=0; i<pipeNum; i++)
+    int a =0, i;
+    for(i=0; i<pipeNum; i++)
         if(pipeArray[i].free == 0) a++;
     return a;
 }
@@ -57,4 +58,9 @@ int UpdateFlappyBird()
     ChangeCell(playerBird.y, playerBird.x, playerBird.playerChar);
     UpdateBird(&playerBird, -1);
     return 1;
+}
+
+void JumpBird(int val)
+{
+    UpdateBird(&playerBird, val);
 }

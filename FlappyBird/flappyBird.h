@@ -7,3 +7,5 @@ void UpdatePipes();
 int FreePipesNum();
 
 int UpdateFlappyBird();
+
+void JumpBird(int val);

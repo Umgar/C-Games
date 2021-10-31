@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <curses.h>
 #include "argumentHandler.c"
 #include "mapHandler.h"
 #include "FlappyBird/flappyBird.h"
@@ -10,6 +11,7 @@ void Exit();
 
 int main(int argc, char **argv)
 {
+    
     if (ArgumentHandler(argc, argv) == 0)
         return 0;
     Setup();
@@ -17,13 +19,12 @@ int main(int argc, char **argv)
     int gameLoop = 1;
     int input;
 
-    struct timespec gameLoopTime[2] = {0, 1000000000L/8};
-
     while (gameLoop == 1)
     {
         ShowMap();
         gameLoop = UpdateFlappyBird();
-        nanosleep(gameLoopTime, NULL);
+        if(getch() == ' ')
+            JumpBird(3);
     }
     Exit();
     return 0;
@@ -31,6 +32,9 @@ int main(int argc, char **argv)
 
 void Setup()
 {
+    initscr();
+    noecho();
+    timeout(1000/8);
     CreateMap();
     PipeArraySetUp();
     playerBird = CreateBird(4, mapH / 2);
@@ -39,4 +43,7 @@ void Setup()
 void Exit()
 {
     DestroyMap();
+    sleep(10000);
+    endwin();
+
 }
