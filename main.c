@@ -9,6 +9,8 @@ void Setup();
 
 void Exit();
 
+void FlappyBird(int *gameLoop);
+
 int main(int argc, char **argv)
 {
     
@@ -22,12 +24,17 @@ int main(int argc, char **argv)
     while (gameLoop == 1)
     {
         ShowMap();
-        gameLoop = UpdateFlappyBird();
-        if(getch() == ' ')
-            JumpBird(3);
+        FlappyBird(&gameLoop);
     }
     Exit();
     return 0;
+}
+
+void FlappyBird(int *gameLoop)
+{
+    (*gameLoop) = UpdateFlappyBird();
+        if(getch() == ' ')
+            JumpBird(4);
 }
 
 void Setup()
@@ -43,7 +50,6 @@ void Setup()
 void Exit()
 {
     DestroyMap();
-    sleep(10000);
     endwin();
-
+    printf("%i \n", FBGetPoints());
 }

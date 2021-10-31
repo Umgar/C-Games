@@ -9,13 +9,14 @@ struct Pipe
     int free;
 };
 
-void MovePipePos(struct Pipe *movingPipe)
+void MovePipePos(struct Pipe *movingPipe, int playerX)
 {
+    int i;
     if(movingPipe->begI<=1)
     {
         if(movingPipe->width <= 0)
         {
-            for (int i = 1; i < mapH-1; i++)
+            for (i = 1; i < mapH-1; i++)
                 ChangeCell(i, 1, ' ');
             movingPipe->free = 0;
             return;
@@ -33,19 +34,20 @@ void MovePipePos(struct Pipe *movingPipe)
     }
     if(movingPipe->endI < mapW-2)
     {
-        for (int i = 1; i < mapH-1; i++)
+        for (i = 1; i < mapH-1; i++)
             ChangeCell(i, movingPipe->endI+1, ' ');
     }
 }
 
 void DrawPipe(struct Pipe *movingPipe)
 {
+    int i, j;
     if(movingPipe->free == 0) movingPipe->free = 1;
-    for (int i = 0; i < movingPipe->width; i++)
+    for (i = 0; i < movingPipe->width; i++)
     {
         if (i + movingPipe->begI >= mapW - 1)
             return;
-        for (int j = 1; j < mapH - 1; j++)
+        for (j = 1; j < mapH - 1; j++)
         {
             if(j<movingPipe->partOne || j>movingPipe->partTwo)
                 ChangeCell(j, i + movingPipe->begI, '@');

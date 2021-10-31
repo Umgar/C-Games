@@ -2,6 +2,8 @@
 #include "pipe.h"
 #include "bird.h"
 
+int flappyBirdPoints = 0;
+
 struct Pipe pipeArray[10];
 
 struct Bird playerBird;
@@ -9,6 +11,16 @@ struct Bird playerBird;
 const int pipeWidth = 6;
 
 const int pipeNum = 10;
+
+void FBAddPoints(int val)
+{
+    flappyBirdPoints += val;
+}
+
+int FBGetPoints()
+{
+    return flappyBirdPoints;
+}
 
 void PipeArraySetUp()
 {
@@ -28,7 +40,7 @@ void UpdatePipes(int maxGap)
     {
         if(pipeArray[i].free == 0) continue;
         if(pipeArray[i].endI == 0) {pipeArray[i].free = 0; continue;}
-        MovePipePos(&pipeArray[i]);
+        MovePipePos(&pipeArray[i], playerBird.x);
         DrawPipe(&pipeArray[i]);
     }
     if(timer>=maxGap)
@@ -51,12 +63,13 @@ int FreePipesNum()
     return a;
 }
 
+
 int UpdateFlappyBird()
 {
     UpdatePipes(pipeWidth + 9);
     if(GetCellVal(playerBird.y, playerBird.x) == '@') return 0;
-    ChangeCell(playerBird.y, playerBird.x, playerBird.playerChar);
     UpdateBird(&playerBird, -1);
+    ChangeCell(playerBird.y, playerBird.x, playerBird.playerChar);
     return 1;
 }
 

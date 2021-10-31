@@ -9,7 +9,7 @@ struct Bird
 
 void UpdateBird(struct Bird *playerBird, int _y)
 {
-    ChangeCell(playerBird->y+_y, playerBird->x, ' ');
+    ChangeCell(playerBird->y, playerBird->x, ' ');
     playerBird->y-=_y;
     if(playerBird->y <= 1)
             playerBird->y=2;

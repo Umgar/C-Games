@@ -1,6 +1,6 @@
 #include "pipe.c"
 
-void MovePipePos(struct Pipe *movingPipe);
+void MovePipePos(struct Pipe *movingPipe, int playerX);
 
 void DrawPipe(struct Pipe *movingPipe);
 
