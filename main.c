@@ -21,14 +21,15 @@ int main(int argc, char **argv)
     if (ArgumentHandler(argc, argv, &gameType) == 1)
         return 0;
     Setup();
-    FlappyBird();
+    gameType = Menu();
+    if(gameType==1) FlappyBird();
+    else {printf("No more games\n");}
     Exit();
     return 0;
 }
 
 void FlappyBird()
 {
-    printw("Hello world");
     int gameLoop = 1;
     PipeArraySetUp();
     playerBird = CreateBird(4, mapH / 2);
@@ -70,25 +71,17 @@ int Menu()
     
     while (gameLoop == 1)
     {
-        printw("%i", i);
         input = getch();
-        switch (input)
-        {
-        case KEY_DOWN:
+        printw("%i == %i\n", i, KEY_DOWN);
+        if(input == KEY_DOWN)
             if(i+1 >= maxI) i = 0;
             else i++;
-            break;
-        case KEY_UP:
+        if(input == KEY_DOWN)
             if(i-1 <= 0) i = maxI;
             else i--;
-            break;
-        case KEY_ENTER:
-            val = i;
-            gameLoop = 0;
-            break;
-        default:
-            break;
-        }
+        if(input == KEY_ENTER)
+            {val = i;
+            gameLoop = 0;}
     }
     return val;
 }
