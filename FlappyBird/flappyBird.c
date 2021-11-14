@@ -41,6 +41,7 @@ void UpdatePipes(int maxGap)
         if(pipeArray[i].free == 0) continue;
         if(pipeArray[i].endI == 0) {pipeArray[i].free = 0; continue;}
         MovePipePos(&pipeArray[i], playerBird.x);
+        if(pipeArray[i].endI == playerBird.x) FBAddPoints(100);
         DrawPipe(&pipeArray[i]);
     }
     if(timer>=maxGap)
