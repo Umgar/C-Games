@@ -1,19 +1,19 @@
+/*Krzysztof Pacek*/
 #include <stdio.h>
 #include <unistd.h>
 #include <curses.h>
 #include "argumentHandler.c"
 #include "mapHandler.h"
 #include "FlappyBird/flappyBird.h"
+#include "mainMenu.h"
 
 const double _TIMEOUT = 1000/8;
 
 void Setup();
 
-void Exit();
+void Exit(int gameType);
 
 void FlappyBird();
-
-int Menu();
 
 int main(int argc, char **argv)
 {
@@ -21,10 +21,13 @@ int main(int argc, char **argv)
     if (ArgumentHandler(argc, argv, &gameType) == 1)
         return 0;
     Setup();
-    gameType = Menu();
-    if(gameType==1) FlappyBird();
+    CreateMainScreen();
+    if(gameType == 0)
+        Menu(&gameType);
+    if(gameType == -1) {Exit(gameType); return 0;}
+    else if(gameType==1) FlappyBird();
     else {printf("No more games\n");}
-    Exit();
+    Exit(gameType);
     return 0;
 }
 
@@ -53,35 +56,11 @@ void Setup()
     CreateMap();
 }
 
-void Exit()
+void Exit(int gameType)
 {
     DestroyMap();
     endwin();
-    printf("%i \n", FBGetPoints());
+    if(gameType > 0)
+        printf("%i \n", FBGetPoints());
 }
 
-int Menu()
-{
-    int val = 0;
-    int gameLoop = 1;
-    timeout(-1);
-    int input;
-    int maxI = 2;
-    int i = 0;
-    
-    while (gameLoop == 1)
-    {
-        input = getch();
-        printw("%i == %i\n", i, KEY_DOWN);
-        if(input == KEY_DOWN)
-            if(i+1 >= maxI) i = 0;
-            else i++;
-        if(input == KEY_DOWN)
-            if(i-1 <= 0) i = maxI;
-            else i--;
-        if(input == KEY_ENTER)
-            {val = i;
-            gameLoop = 0;}
-    }
-    return val;
-}

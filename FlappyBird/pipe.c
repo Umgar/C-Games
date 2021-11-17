@@ -7,6 +7,7 @@ struct Pipe
     int width;
     int begI, endI;
     int free;
+    int pipeHoleSize;
 };
 
 void MovePipePos(struct Pipe *movingPipe, int playerX)
@@ -60,7 +61,7 @@ void PipeHoleCreate(struct Pipe *pipe)
     srand(time(NULL));
     int randomNum = rand() % (mapH-6) + 1;
     pipe->partOne = randomNum;
-    pipe->partTwo = randomNum+5;
+    pipe->partTwo = randomNum+pipe->pipeHoleSize;
 }
 
 struct Pipe CreatePipe(int width)
@@ -69,6 +70,7 @@ struct Pipe CreatePipe(int width)
     newPipe.begI = mapW - 1;
     newPipe.width = width;
     newPipe.endI = newPipe.begI + newPipe.width - 1;
+    newPipe.pipeHoleSize = 6;
     PipeHoleCreate(&newPipe);
     newPipe.free = 0;
     return newPipe;
