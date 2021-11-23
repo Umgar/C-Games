@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const int mapH = 20, mapW = 100;
+int mapH, mapW;
 
 char **gameMap;
 
@@ -16,8 +16,10 @@ void ShowMap()
     }
 }
 
-void CreateMap()
+void CreateMap(int mapHeight,int mapWidth)
 {
+    mapH = mapHeight;
+    mapW = mapWidth;
     int i, j;
 
     gameMap = (char**)malloc(mapH * sizeof(char*));

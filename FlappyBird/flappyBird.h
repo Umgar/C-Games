@@ -7,6 +7,8 @@ void UpdatePipes();
 
 int FreePipesNum();
 
+void SetUpFlappyBird();
+
 int UpdateFlappyBird();
 
 void JumpBird(int val);

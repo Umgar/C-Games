@@ -4,7 +4,7 @@
 */
 void ShowMap();
 
-void CreateMap();
+void CreateMap(int mapHeight,int mapWidth);
 
 void DestroyMap();
 

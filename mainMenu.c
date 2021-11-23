@@ -16,7 +16,7 @@ void Menu(int *gameType)
         *gameType = 1;
         break;
     case 2:
-        //scoreboard
+        *gameType = 2;
         break;
     case 3:
         *gameType = -1;

@@ -64,10 +64,23 @@ int FreePipesNum()
     return a;
 }
 
+void SetUpFlappyBird(){
+    int y = 16;
+    int x = 42;
+    int i;
+    char string[] = "***Press space***";
+    for(i=0;i<17;i++)
+        ChangeCell(y, x+i, string[i]);
+    ShowMap();
+    do{
+        if(getch() == ' ') return;
+    }while(true);
+}
+
 
 int UpdateFlappyBird()
 {
-    UpdatePipes(pipeWidth + 9);
+    UpdatePipes(pipeWidth + 13);
     if(GetCellVal(playerBird.y, playerBird.x) == '@') return 0;
     UpdateBird(&playerBird, -1);
     ChangeCell(playerBird.y, playerBird.x, playerBird.playerChar);
