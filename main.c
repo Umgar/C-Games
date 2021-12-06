@@ -53,6 +53,7 @@ int main(int argc, char **argv)
 void FlappyBird()
 {
     int gameLoop = 1;
+    int input;
     CreateMap(20, 100);
     SetUpFlappyBird();
     DestroyMap();
@@ -63,7 +64,8 @@ void FlappyBird()
     while (gameLoop == 1)
     {
         ShowMap();
-        if (getch() == ' ')
+        input = getch();
+        if (input == ' ')
             JumpBird(4);
         else
             gameLoop = UpdateFlappyBird();

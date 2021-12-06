@@ -47,23 +47,26 @@ void ShowScore()
 void AddScore(int score, char *nickname)
 {
     timeout(-1);
-    struct sbItem temp[5];
-    int i=0, j=5, z;
+    struct sbItem temp[6];
+    struct sbItem z;
+    int i, j;
     for(i=0;i<5;i++)
         temp[i] = scoreboardList[i];
+    temp[5].score = score;
+    for(i=0;i<20;i++)
+        temp[5].nick[i] = nickname[i];
     for(i=0;i<5;i++)
-    {
-        if(scoreboardList[i].score<score)
-        {
-            j=i;
-            for(z=0;z<20;z++)
-                scoreboardList[i].nick[z] = nickname[z];
-            scoreboardList[i].score = score;
-            break;
-        }
-    }
-    for(i=j;i<4;i++)
-        scoreboardList[j+1] = temp[j];
+        for(j=i+1;j<6;j++)
+            {
+                if(temp[i].score < temp[j].score)
+                {
+                    z = temp[i];
+                    temp[i] = temp[j];
+                    temp[j] = z;
+                }
+            }
+    for(i=0;i<5;i++)
+        scoreboardList[i] = temp[i];
     FILE *scFile;
     scFile = fopen("scoreboard.txt", "w");
     for(i=0;i<5;i++)

@@ -31,6 +31,7 @@ void PipeArraySetUp()
     DrawPipe(&pipeArray[0]);
 }
 
+
 int timer = 0;
 
 void UpdatePipes(int maxGap)
