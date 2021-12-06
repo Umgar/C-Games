@@ -11,8 +11,8 @@ void UpdateBird(struct Bird *playerBird, int _y)
 {
     ChangeCell(playerBird->y, playerBird->x, ' ');
     playerBird->y-=_y;
-    if(playerBird->y <= 1)
-            playerBird->y=2;
+    if(playerBird->y < 0)
+            playerBird->y=0;
     else if(playerBird->y >= mapH-1)
         playerBird->y = mapH-2;
 }
