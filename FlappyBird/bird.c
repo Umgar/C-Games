@@ -1,13 +1,14 @@
 #include <stdlib.h>
 #include "../mapHandler.h"
-struct Bird
+struct bird
 {
     char playerChar;
     int x;
     int y;
 };
+typedef struct bird Bird;
 
-void UpdateBird(struct Bird *playerBird, int _y, int mapH)
+void UpdateBird(Bird *playerBird, int _y, int mapH)
 {
     ChangeCell(playerBird->y, playerBird->x, ' ');
     playerBird->y-=_y;
@@ -17,9 +18,9 @@ void UpdateBird(struct Bird *playerBird, int _y, int mapH)
         playerBird->y = mapH-2;
 }
 
-struct Bird CreateBird(int _x, int _y)
+Bird CreateBird(int _x, int _y)
 {
-    struct Bird newBird;
+    Bird newBird;
     newBird.playerChar = 'C';
     newBird.x = 4;
     newBird.y = mapH/2;

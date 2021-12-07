@@ -6,9 +6,9 @@
 
 int flappyBirdPoints = 0;
 
-struct Pipe pipeArray[10];
+Pipe pipeArray[10];
 
-struct Bird playerBird;
+Bird playerBird;
 const int pipeWidth = 6;
 
 const int pipeNum = 10;
@@ -29,7 +29,7 @@ void PipeArraySetUp()
     for(i=0;i<pipeNum;i++)
         pipeArray[i].free = 0;
     pipeArray[0] = CreatePipe(6);
-    DrawPipe(&pipeArray[0]);
+    DrawPipe((void *)&pipeArray[0]);
 }
 
 
@@ -42,16 +42,16 @@ void UpdatePipes(int maxGap)
     {
         if(pipeArray[i].free == 0) continue;
         if(pipeArray[i].endI == 0) {pipeArray[i].free = 0; continue;}
-        MovePipePos(&pipeArray[i], playerBird.x);
+        MovePipePos((void *)&pipeArray[i], playerBird.x);
         if(pipeArray[i].endI == playerBird.x) FBAddPoints(100);
-        DrawPipe(&pipeArray[i]);
+        DrawPipe((void *)&pipeArray[i]);
     }
     if(timer>=maxGap)
     for(i=0; i<pipeNum; i++)
     {
         if(pipeArray[i].free == 1) continue;
         pipeArray[i] = CreatePipe(pipeWidth);
-        DrawPipe(&pipeArray[i]);
+        DrawPipe((void *)&pipeArray[i]);
         timer=0;
         break;
     }
@@ -92,5 +92,5 @@ int UpdateFlappyBird()
 
 void JumpBird(int val)
 {
-    UpdateBird(&playerBird, val, mapH);
+    UpdateBird((void*)&playerBird, val, mapH);
 }

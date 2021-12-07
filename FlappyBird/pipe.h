@@ -1,14 +1,7 @@
 #ifndef __PIPE__
 #define __PIPE__
 
-void MovePipePos(struct Pipe *movingPipe, int playerX);
-
-void DrawPipe(struct Pipe *movingPipe);
-
-void PipeHoleCreate(struct Pipe *pipe);
-
-struct Pipe CreatePipe(int width);
-extern struct Pipe
+extern struct pipe
 {
     int partOne, partTwo;
     int width;
@@ -16,4 +9,15 @@ extern struct Pipe
     int free;
     int pipeHoleSize;
 };
+typedef struct pipe Pipe;
+
+void MovePipePos(Pipe *movingPipe, int playerX);
+
+void DrawPipe(Pipe *movingPipe);
+
+void PipeHoleCreate(Pipe *pipe);
+
+Pipe CreatePipe(int width);
+
+
 #endif

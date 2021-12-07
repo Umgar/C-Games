@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include "../mapHandler.h"
 
-struct Pipe
+struct pipe
 {
     int partOne, partTwo;
     int width;
@@ -10,8 +11,9 @@ struct Pipe
     int free;
     int pipeHoleSize;
 };
+typedef struct pipe Pipe;
 
-void MovePipePos(struct Pipe *movingPipe, int playerX)
+void MovePipePos(Pipe *movingPipe, int playerX)
 {
     int i;
     if(movingPipe->begI<=1)
@@ -41,7 +43,7 @@ void MovePipePos(struct Pipe *movingPipe, int playerX)
     }
 }
 
-void DrawPipe(struct Pipe *movingPipe)
+void DrawPipe(Pipe *movingPipe)
 {
     int i, j;
     if(movingPipe->free == 0) movingPipe->free = 1;
@@ -57,7 +59,7 @@ void DrawPipe(struct Pipe *movingPipe)
     }
 }
 
-void PipeHoleCreate(struct Pipe *pipe)
+void PipeHoleCreate(Pipe *pipe)
 {
     srand(time(NULL));
     int randomNum = rand() % (mapH-6) + 1;
@@ -65,9 +67,9 @@ void PipeHoleCreate(struct Pipe *pipe)
     pipe->partTwo = randomNum+pipe->pipeHoleSize;
 }
 
-struct Pipe CreatePipe(int width)
+Pipe CreatePipe(int width)
 {
-    struct Pipe newPipe;
+    Pipe newPipe;
     newPipe.begI = mapW - 1;
     newPipe.width = width;
     newPipe.endI = newPipe.begI + newPipe.width - 1;
