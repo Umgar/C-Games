@@ -1,5 +1,7 @@
-#include "mainMenu.c"
+#ifndef __MAINMENU__
+#define __MAINMENU__
 
 void Menu(int *gameType);
 void CreateMainScreen();
-void RegisterPlayer(char *playerName);
+
+#endif

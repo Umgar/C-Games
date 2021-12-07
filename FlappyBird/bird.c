@@ -1,5 +1,5 @@
 #include <stdlib.h>
-
+#include "../mapHandler.h"
 struct Bird
 {
     char playerChar;
@@ -7,7 +7,7 @@ struct Bird
     int y;
 };
 
-void UpdateBird(struct Bird *playerBird, int _y)
+void UpdateBird(struct Bird *playerBird, int _y, int mapH)
 {
     ChangeCell(playerBird->y, playerBird->x, ' ');
     playerBird->y-=_y;

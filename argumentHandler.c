@@ -1,17 +1,5 @@
 #include <stdio.h>
 
-int OptionHandler(int argc, char **argv, int i, int *gameType);
-
-int ArgumentHandler(int argc, char **argv, int *gameType)
-{
-    int i;
-    if(argc > 1)
-        for(i=0;i<argc;i++)
-        {
-            if(argv[i][0] == '-') if(OptionHandler(argc, argv, i, gameType) == 1) return 1;
-        }
-    return 0;
-}
 
 int OptionHandler(int argc, char **argv, int i, int *gameType)
 {
@@ -24,5 +12,16 @@ int OptionHandler(int argc, char **argv, int i, int *gameType)
     }
     if(argv[i][1] == 'f')
         (*gameType) = 1;
+    return 0;
+}
+
+int ArgumentHandler(int argc, char **argv, int *gameType)
+{
+    int i;
+    if(argc > 1)
+        for(i=0;i<argc;i++)
+        {
+            if(argv[i][0] == '-') if(OptionHandler(argc, argv, i, gameType) == 1) return 1;
+        }
     return 0;
 }

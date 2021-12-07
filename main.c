@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <curses.h>
-#include "argumentHandler.c"
+#include "argumentHandler.h"
 #include "mapHandler.h"
 #include "FlappyBird/flappyBird.h"
 #include "mainMenu.h"
@@ -55,11 +55,10 @@ void FlappyBird()
     int gameLoop = 1;
     int input;
     CreateMap(20, 100);
-    SetUpFlappyBird();
+    SetUpFlappyBird(mapH);
     DestroyMap();
     CreateMap(20, 100);
     PipeArraySetUp();
-    playerBird = CreateBird(4, mapH / 2);
     timeout(_TIMEOUT);
     while (gameLoop == 1)
     {

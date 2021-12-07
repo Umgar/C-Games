@@ -35,4 +35,3 @@ void CreateMainScreen()
     printw("2) %s\n", optionListB);
     printw("3) %s\n", optionListC);
 }
-void RegisterPlayer(char *playerName);

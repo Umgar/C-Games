@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <curses.h>
 
 struct sbItem
 {
@@ -13,9 +14,9 @@ struct sbItem scoreboardList[5];
 void LoadScore()
 {
     FILE *scFile;
-    int c;
+    scFile = fopen("scoreboard.txt", "r");
     int i;
-    if (scFile = fopen("scoreboard.txt", "r")) 
+    if (scFile) 
     {
         for(i=0;i<5;i++)
             fscanf(scFile, "%d %s", &scoreboardList[i].score, scoreboardList[i].nick);

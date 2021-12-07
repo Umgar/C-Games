@@ -1,13 +1,14 @@
 #include <stdlib.h>
+#include <curses.h>
 #include "pipe.h"
 #include "bird.h"
+#include "../mapHandler.h"
 
 int flappyBirdPoints = 0;
 
 struct Pipe pipeArray[10];
 
 struct Bird playerBird;
-
 const int pipeWidth = 6;
 
 const int pipeNum = 10;
@@ -65,7 +66,8 @@ int FreePipesNum()
     return a;
 }
 
-void SetUpFlappyBird(){
+void SetUpFlappyBird(int mapH){
+    playerBird = CreateBird(4, mapH / 2);
     int y = 16;
     int x = 42;
     int i;
@@ -75,7 +77,7 @@ void SetUpFlappyBird(){
     ShowMap();
     do{
         if(getch() == ' ') return;
-    }while(true);
+    }while(1==1);
 }
 
 
@@ -83,12 +85,12 @@ int UpdateFlappyBird()
 {
     UpdatePipes(pipeWidth + 13);
     if(GetCellVal(playerBird.y, playerBird.x) == '@') return 0;
-    UpdateBird(&playerBird, -1);
+    UpdateBird(&playerBird, -1, mapH);
     ChangeCell(playerBird.y, playerBird.x, playerBird.playerChar);
     return 1;
 }
 
 void JumpBird(int val)
 {
-    UpdateBird(&playerBird, val);
+    UpdateBird(&playerBird, val, mapH);
 }
