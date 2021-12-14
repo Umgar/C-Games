@@ -2,16 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../mapHandler.h"
-
-struct pipe
+typedef struct Pipe
 {
     int partOne, partTwo;
     int width;
     int begI, endI;
     int free;
     int pipeHoleSize;
-};
-typedef struct pipe Pipe;
+}Pipe;
 
 void MovePipePos(Pipe *movingPipe, int playerX)
 {

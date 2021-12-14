@@ -1,13 +1,12 @@
 #ifndef __BIRD__
 #define __BIRD__
 
-extern struct bird
+typedef struct Bird
 {
     char playerChar;
     int x;
     int y;
-    };
- typedef struct bird Bird;
+    } Bird;
 
 void UpdateBird(Bird *playerBird, int _y, int mapH);
 Bird CreateBird(int _x, int _y);

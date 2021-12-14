@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include "../mapHandler.h"
-struct bird
+
+typedef struct Bird
 {
     char playerChar;
     int x;
     int y;
-};
-typedef struct bird Bird;
+    } Bird;
 
 void UpdateBird(Bird *playerBird, int _y, int mapH)
 {

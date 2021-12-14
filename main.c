@@ -17,6 +17,8 @@ void Exit();
 
 void FlappyBird();
 
+int CheckScreenSize(int minWidth, int minHeight);
+
 int main(int argc, char **argv)
 {
     
@@ -54,10 +56,14 @@ void FlappyBird()
 {
     int gameLoop = 1;
     int input;
-    CreateMap(20, 100);
+    int gameHeight = 20;
+    int gameWidth = 100;
+    if(CheckScreenSize(gameWidth+1, gameHeight+1)!=0)
+        return;
+    CreateMap(gameHeight, gameWidth);
     SetUpFlappyBird(mapH);
     DestroyMap();
-    CreateMap(20, 100);
+    CreateMap(gameHeight, gameWidth);
     PipeArraySetUp();
     timeout(_TIMEOUT);
     while (gameLoop == 1)
@@ -74,12 +80,36 @@ void FlappyBird()
     AddScore(score, nickname);
 }
 
+int CheckScreenSize(int minWidth, int minHeight)
+{
+    int exitStatus = 0;
+    clear();
+    if(COLS < minWidth)
+    {
+        printw("Terminal jest za waski! Musi miec szerokosc min:%i\nObecnie ma szerokosc:%i\n",minWidth, COLS);
+        exitStatus = 1;
+    }
+    if(LINES < minHeight)
+    {
+        printw("Terminal jest za niski! Musi miec wysokosc min:%i\nObecnie ma wysokosc:%i\n",minHeight, LINES);
+        exitStatus = 1;
+    }
+    if(exitStatus != 0)
+    {
+        printw("\nPress any button to return...\n");
+        getch();
+    }
+    clear();
+    return exitStatus;
+}
+
 void Setup()
 {
     LoadScore();
     printf("Enter nickname: ");
     scanf("%s", nickname);
     initscr();
+    use_env(TRUE);
     noecho();
 }
 

@@ -1,15 +1,14 @@
 #ifndef __PIPE__
 #define __PIPE__
 
-extern struct pipe
+typedef struct pipe
 {
     int partOne, partTwo;
     int width;
     int begI, endI;
     int free;
     int pipeHoleSize;
-};
-typedef struct pipe Pipe;
+}Pipe;
 
 void MovePipePos(Pipe *movingPipe, int playerX);
 
